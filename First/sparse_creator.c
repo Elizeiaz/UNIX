@@ -9,13 +9,15 @@
 
 int main(int argc, char *argv[]) {
     int fd = open("fileA", O_CREAT | O_TRUNC | O_WRONLY, 0777);
-    truncate("fileA", 4 * 1024 * 1024 + 1);
-    lseek(fd, 0, SEEK_SET);
-    write(fd, "1", 1);
-    lseek(fd, 10000, SEEK_SET);
-    write(fd, "1", 1);
-    lseek(fd, 0, SEEK_END);
-    write(fd, "1", 1);
+    int size = 4 * 1024 * 1024 + 1;
+    for (int i = 0; i < size; i++) {
+    	if (i == 0 || i == size - 1 || i == 10000) {
+    		write(fd, "1", 1);
+    	}
+    	else {
+    	write(fd, "0", 1);
+    	}
+    }
     close(fd);
     return 0;
 }

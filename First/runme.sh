@@ -1,5 +1,6 @@
 make
 cd target || mkdir target && cd target 2> /dev/null
+echo "start generating sparse file (~5sec)"
 ../sparse_creator.out
 ../main.out fileA fileB
 gzip -kf fileA fileB

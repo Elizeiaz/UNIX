@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
     }
 
     // вычленияем размер буфера
-    char *bufsize = NULL;
+    char *bufsize = "4096";
     int res = 0;
     while ((res = getopt(argc, argv, "b:")) != -1) {
 
@@ -75,6 +75,7 @@ int main(int argc, char *argv[]) {
     int overallbytes = 0;
     while (bytesRead != 0) {
         overallbytes += bytesRead;
+        write(targetfd, buf, bytesRead);
         if (checkzero(buf, bytesRead)) {
             if (zerocount == 0) {
                 offset = overallbytes - bytesRead;
